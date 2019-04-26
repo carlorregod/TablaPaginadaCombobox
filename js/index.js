@@ -23,7 +23,9 @@ ajaxCallback = function(params, method, url, callback, asynchr=true )
 
 
 fn_callback_Tabla = function(data) {
-    document.getElementById('tabla_agenda').innerHTML = data;
+    var respJson = JSON.parse(data);
+    document.getElementById('tabla_agenda').innerHTML = respJson.lista;
+    document.getElementById('pag_actual').innerHTML = respJson.paginas_actual;
 };
 
 fn_callback_PaginaCombo = function(data) {
@@ -34,7 +36,8 @@ fn_callback_PaginaCombo = function(data) {
 
 inicio = function() {
     //Carga de tabla
-    parametros = '&comando=cargaInicial';
+    parametros = '&comando=cargaInicial'+
+                    '&pagina=1';
     method= "POST";
     url='php/modelador.php';
     ajaxCallback(parametros, method, url, fn_callback_Tabla);
@@ -46,4 +49,16 @@ inicio = function() {
     
 };
 
+cambio_combobox = function() {
+    //Re-carga de tabla
+    var pagina = document.getElementById('pagina_combobox').value;
+    parametros = '&comando=cargaInicial'+
+                    '&pagina='  +pagina;
+    method= "POST";
+    url='php/modelador.php';
+    ajaxCallback(parametros, method, url, fn_callback_Tabla);
+};
+
 window.onload = inicio;
+
+document.getElementById('pagina_combobox').onchange = cambio_combobox;

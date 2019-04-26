@@ -29,7 +29,7 @@
 
     <table>
         <tr>
-            <td><p class="mr-2 mb-1">Página 1 de <span id="total_pag"></span></p></td>
+            <td><p class="mr-2 mb-1">Página <span id="pag_actual"></span> de <span id="total_pag"></span></p></td>
             <td>
             <select class="custom-select custom-select-sm" id="pagina_combobox">
                 <!-- Las páginas... -->

@@ -3,14 +3,15 @@
 require "conexion.php";
 
 $cmd = $_POST['comando'];
-
-$paginas_totales;
+$pagina = $_POST['pagina'];
+$registro_x_pagina = 4;
 
 switch($cmd)
 {
     case "cargaInicial":
+        $offset = ($pagina-1)*$registro_x_pagina;
         $pgsql = getConnect();
-        $sql = "SELECT * FROM Agenda LIMIT 4 OFFSET 0";
+        $sql = "SELECT * FROM Agenda LIMIT 4 OFFSET '$offset'";
         $consulta = pg_prepare($pgsql, "consulta_tabla",$sql) or die('Falló la query1: '. pg_last_error());;
         $consulta = pg_execute($pgsql, "consulta_tabla",array()) or die('Falló la query2: ' . pg_last_error());;
         $lista = "";
@@ -27,11 +28,11 @@ switch($cmd)
                         '</td></tr>';            
         }
         pg_close($pgsql);
-        echo $lista;
+        $arreglo =['lista' => $lista ,'paginas_actual' => $pagina];
+        echo json_encode($arreglo, JSON_FORCE_OBJECT);
         break;
 
     case "cargaPaginaCbox":
-        $registro_x_pagina = 4;
         $pgsql = getConnect();
         $sql = "SELECT * FROM Agenda";
         $consulta = pg_prepare($pgsql, "consulta_tabla",$sql) or die('Falló la query1: '. pg_last_error());;
