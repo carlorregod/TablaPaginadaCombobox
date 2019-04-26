@@ -23,18 +23,16 @@
         </tr>
     </thead>
     <tbody id="tabla_agenda">
-
+        <!-- Los registros de tabla... -->
     </tbody>
     </table>
 
     <table>
         <tr>
-            <td><p class="mr-2 mb-1">Página 1 de 3</p></td>
+            <td><p class="mr-2 mb-1">Página 1 de <span id="total_pag"></span></p></td>
             <td>
-            <select class="custom-select custom-select-sm">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+            <select class="custom-select custom-select-sm" id="pagina_combobox">
+                <!-- Las páginas... -->
             </select>
             </td>
         </tr>

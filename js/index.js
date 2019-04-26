@@ -24,14 +24,26 @@ ajaxCallback = function(params, method, url, callback, asynchr=true )
 
 fn_callback_Tabla = function(data) {
     document.getElementById('tabla_agenda').innerHTML = data;
-    return false;
+};
+
+fn_callback_PaginaCombo = function(data) {
+    var respJson = JSON.parse(data);
+    document.getElementById('pagina_combobox').innerHTML = respJson.lista;
+    document.getElementById('total_pag').innerHTML = respJson.paginas_totales;
 };
 
 inicio = function() {
+    //Carga de tabla
     parametros = '&comando=cargaInicial';
     method= "POST";
     url='php/modelador.php';
     ajaxCallback(parametros, method, url, fn_callback_Tabla);
+    //Cargar combobox-páginas
+    parametros = '&comando=cargaPaginaCbox';
+    method= "POST";
+    url='php/modelador.php';
+    ajaxCallback(parametros, method, url, fn_callback_PaginaCombo);
+    
 };
 
 window.onload = inicio;
