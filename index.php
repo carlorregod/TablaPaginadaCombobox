@@ -31,9 +31,23 @@
         <tr>
             <td><p class="mr-2 mb-1">Página <span id="pag_actual"></span> de <span id="total_pag"></span></p></td>
             <td>
-            <select class="custom-select custom-select-sm" id="pagina_combobox">
-                <!-- Las páginas... -->
-            </select>
+                <select class="custom-select custom-select-sm" id="pagina_combobox">
+                    <!-- Las páginas... -->
+                </select>
+            </td>
+            <td><p class="mr-2 ml-2 mb-1">Mostrar filas: </p></td>
+            <td>
+                <select class="custom-select custom-select-sm" id="alternativas_pagina">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
             </td>
         </tr>
     </table>

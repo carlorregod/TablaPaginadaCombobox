@@ -36,29 +36,43 @@ fn_callback_PaginaCombo = function(data) {
 
 inicio = function() {
     //Carga de tabla
-    parametros = '&comando=cargaInicial'+
-                    '&pagina=1';
-    method= "POST";
-    url='php/modelador.php';
-    ajaxCallback(parametros, method, url, fn_callback_Tabla);
-    //Cargar combobox-páginas
-    parametros = '&comando=cargaPaginaCbox';
-    method= "POST";
-    url='php/modelador.php';
-    ajaxCallback(parametros, method, url, fn_callback_PaginaCombo);
-    
+    document.getElementById('alternativas_pagina').value=4;
+    cant_registros();
 };
 
 cambio_combobox = function() {
     //Re-carga de tabla
     var pagina = document.getElementById('pagina_combobox').value;
+    var num_pagina = document.getElementById('alternativas_pagina').value;
     parametros = '&comando=cargaInicial'+
-                    '&pagina='  +pagina;
+                    '&pagina='          +pagina +
+                    '&num_pagina='      +num_pagina;
     method= "POST";
     url='php/modelador.php';
     ajaxCallback(parametros, method, url, fn_callback_Tabla);
 };
 
+cant_registros = function() {
+    //Re-reCarga de tabla
+    var num_pagina = document.getElementById('alternativas_pagina').value;
+    parametros = '&comando=cargaInicial'+
+                    '&pagina=1'         +
+                    '&num_pagina='      + num_pagina;
+    method= "POST";
+    url='php/modelador.php';
+    ajaxCallback(parametros, method, url, fn_callback_Tabla);
+    //Cargar combobox-páginas
+    parametros = '&comando=cargaPaginaCbox' +
+                 '&num_pagina='      + num_pagina;
+    method= "POST";
+    url='php/modelador.php';
+    ajaxCallback(parametros, method, url, fn_callback_PaginaCombo);
+    
+    
+};
+
 window.onload = inicio;
 
 document.getElementById('pagina_combobox').onchange = cambio_combobox;
+
+document.getElementById('alternativas_pagina').onchange = cant_registros;

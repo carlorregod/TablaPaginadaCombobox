@@ -4,14 +4,14 @@ require "conexion.php";
 
 $cmd = $_POST['comando'];
 $pagina = $_POST['pagina'];
-$registro_x_pagina = 4;
+$registro_x_pagina = $_POST['num_pagina']; 
 
 switch($cmd)
 {
     case "cargaInicial":
         $offset = ($pagina-1)*$registro_x_pagina;
         $pgsql = getConnect();
-        $sql = "SELECT * FROM Agenda LIMIT 4 OFFSET '$offset'";
+        $sql = "SELECT * FROM Agenda LIMIT '$registro_x_pagina' OFFSET '$offset'";
         $consulta = pg_prepare($pgsql, "consulta_tabla",$sql) or die('Falló la query1: '. pg_last_error());;
         $consulta = pg_execute($pgsql, "consulta_tabla",array()) or die('Falló la query2: ' . pg_last_error());;
         $lista = "";
